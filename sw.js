@@ -3,87 +3,59 @@ const ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
-  'https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
+  '/icons/icon-192.png',
+  '/icons/icon-512.png',
+  'https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&display=swap'
 ];
 
-// --- مرحلة التثبيت (Install) ---
+// Install
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      console.log('Caching assets...');
-      return cache.addAll(ASSETS);
-    }).catch(err => console.error('Asset caching failed:', err))
+    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
   );
   self.skipWaiting();
 });
 
-// --- مرحلة التفعيل (Activate) - تنظيف الكاش القديم ---
+// Activate
 self.addEventListener('activate', e => {
   e.waitUntil(
-    caches.keys().then(keys => {
-      return Promise.all(
-        keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
-      );
-    })
+    caches.keys().then(keys =>
+      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
+    )
   );
   self.clients.claim();
 });
 
-// --- معالجة الطلبات (Fetch) ---
+// Fetch
 self.addEventListener('fetch', e => {
   const { request } = e;
   const url = new URL(request.url);
 
-  // السماح بطلبات الـ Domains الخارجية (مثل API أو خطوط جوجل) دون قيود المصدر نفسه
-  // لكن سنطبق سياسة التخزين عليها لاحقاً إذا رغبت
-  
-  // 1. استراتيجية Network First للصفحات (Navigate)
-  if (request.mode === 'navigate' || request.destination === 'document') {
+  // ✅ الروابط الخارجية تفتح عادي (بدون تدخل)
+  if (url.origin !== self.location.origin) {
+    return;
+  }
+
+  // ✅ Navigation requests (لما المستخدم يضغط رابط) → رجّع index.html دائماً
+  if (request.mode === 'navigate') {
     e.respondWith(
-      fetch(request)
-        .then(response => {
-          if (response && response.status === 200) {
-            const clone = response.clone();
-            caches.open(CACHE_NAME).then(cache => cache.put(request, clone));
-          }
-          return response;
-        })
-        .catch(() => {
-          return caches.match(request).then(cached => cached || caches.match('/index.html'));
-        })
+      caches.match('/index.html').then(cached => {
+        return cached || fetch('/index.html');
+      })
     );
     return;
   }
 
-  // 2. استراتيجية Cache First للملفات الثابتة (JS, CSS, Images, Fonts)
+  // ✅ باقي الطلبات (CSS, JS, Images) → Cache first
   e.respondWith(
-    caches.match(request).then(cachedResponse => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-
-      return fetch(request).then(networkResponse => {
-        // التحقق من صحة الاستجابة قبل تخزينها
-        if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic' && url.origin !== location.origin) {
-          return networkResponse;
-        }
-
-        const responseToCache = networkResponse.clone();
-        caches.open(CACHE_NAME).then(cache => {
-          cache.put(request, responseToCache);
-        });
-
-        return networkResponse;
-      }).catch(() => {
-        // Fallback في حالة الأوفلاين للصور
-        if (request.destination === 'image') {
-          return new Response(
-            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect fill="#162338" width="200" height="200"/><text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="#7A8A9F" font-size="14" font-family="Arial">Offline</text></svg>',
-            { headers: { 'Content-Type': 'image/svg+xml' } }
-          );
-        }
-      });
+    caches.match(request).then(cached => {
+      if (cached) return cached;
+      return fetch(request).then(res => {
+        if (!res  res.status !== 200  res.type !== 'basic') return res;
+        const resClone = res.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put(request, resClone));
+        return res;
+      }).catch(() => caches.match('/index.html'));
     })
   );
 });
