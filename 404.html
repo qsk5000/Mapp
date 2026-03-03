@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <script type="text/javascript">
+      // Take the pathname and remove leading slash
+      var pathname = window.location.pathname;
+
+```
+  // If it's not the root, redirect to index.html with the path
+  if (pathname !== '/' && !pathname.endsWith('.html')) {
+    // Store the path in sessionStorage
+    sessionStorage.redirect = pathname;
+    // Redirect to index.html
+    window.location.href = '/';
+  }
+</script>
+```
+
+  </head>
+  <body>
+  </body>
+</html>
