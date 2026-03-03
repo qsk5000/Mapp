@@ -562,6 +562,13 @@
 </footer>
 
 <script>
+/* ── 🟢 GitHub Pages Redirect Handler ── */
+if (sessionStorage.redirect) {
+  var redirect = sessionStorage.redirect;
+  delete sessionStorage.redirect;
+  window.history.replaceState(null, null, redirect);
+}
+
 /* ── 🟢 تفعيل الـ PWA (تثبيت التطبيق) ── */
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
