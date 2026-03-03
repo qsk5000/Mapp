@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0d1b2a">
+  <meta name="description" content="منصة تعليمية متكاملة تجمع بين التخطيط الذكي والمتابعة الدقيقة">
+  <title>Mizan Academy IQ</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0a1628;
+      --navy2: #0d1f3c;
+      --navy3: #112244;
+      --gold: #c9a84c;
+      --gold2: #e2c06a;
+      --gold3: #f0d080;
+      --white: #f5f0e8;
+      --gray: #8a9bb0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ===== NAVBAR ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      background: rgba(10, 22, 40, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+
+    .nav-logo {
+      font-family: 'Amiri', serif;
+      font-size: 1.1rem;
+      color: var(--gold2);
+      font-weight: 700;
+    }
+
+    .nav-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--navy3);
+      border: 2px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem;
+      color: var(--gold);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .nav-contact {
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 6px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav-contact:hover { background: var(--gold2); }
+
+    .hamburger {
+      background: none; border: none;
+      cursor: pointer; padding: 4px;
+      display: flex; flex-direction: column; gap: 5px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--white); border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 24px 60px;
+      position: relative;
+      background: radial-gradient(ellipse at 50% 30%, #1a2e50 0%, var(--navy) 70%);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(201,168,76,0.06) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(201,168,76,0.04) 0%, transparent 50%);
+    }
+
+    .hero-badge {
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 6px 20px;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      margin-bottom: 32px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      animation: fadeIn 0.8s ease;
+    }
+    .hero-badge::after {
+      content: '•';
+      color: var(--gold3);
+    }
+
+    .hero h1 {
+      font-family: 'Amiri', serif;
+      font-size: clamp(2.4rem, 8vw, 3.5rem);
+      line-height: 1.3;
+      margin-bottom: 20px;
+      animation: slideUp 0.8s ease 0.1s both;
+    }
+
+    .hero h1 span { color: var(--gold2); }
+
+    .hero p {
+      font-size: 1rem;
+      color: var(--gray);
+      max-width: 340px;
+      line-height: 1.8;
+      margin-bottom: 48px;
+      animation: slideUp 0.8s ease 0.2s both;
+    }
+
+    .hero-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+      max-width: 320px;
+      animation: slideUp 0.8s ease 0.3s both;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      padding: 16px 28px;
+      border-radius: 30px;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      text-decoration: none;
+      transition: all 0.25s;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+    }
+    .btn-primary:hover { background: var(--gold2); transform: translateY(-2px); }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,0.25);
+      padding: 16px 28px;
+      border-radius: 30px;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+    .scroll-hint {
+      margin-top: 48px;
+      color: var(--gray);
+      font-size: 0.8rem;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      animation: bounce 2s infinite;
+    }
+    .scroll-hint::after {
+      content: '↓';
+      font-size: 1.2rem;
+      color: var(--gold);
+    }
+
+    /* ===== SECTIONS ===== */
+    section {
+      padding: 70px 24px;
+    }
+
+    .section-title {
+      font-family: 'Amiri', serif;
+      font-size: 1.8rem;
+      color: var(--gold2);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin-bottom: 40px;
+    }
+
+    /* ===== FEATURES ===== */
+    .features { background: var(--navy2); }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 16px;
+      padding: 24px 16px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    .feature-card:hover {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.05);
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .feature-card h3 {
+      font-size: 0.95rem;
+      color: var(--gold2);
+      margin-bottom: 6px;
+    }
+
+    .feature-card p {
+      font-size: 0.8rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* ===== COURSES ===== */
+    .courses-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .course-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: all 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .course-card:hover {
+      border-color: var(--gold);
+      transform: translateX(-4px);
+    }
+
+    .course-icon {
+      width: 52px; height: 52px;
+      border-radius: 12px;
+      background: rgba(201,168,76,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .course-info { flex: 1; }
+    .course-info h3 { font-size: 1rem; margin-bottom: 4px; }
+    .course-info p { font-size: 0.8rem; color: var(--gray); }
+
+    .course-arrow {
+      color: var(--gold);
+      font-size: 1.2rem;
+    }
+
+    /* ===== ABOUT ===== */
+    .about { background: var(--navy2); }
+
+    .about-content {
+      max-width: 500px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .about-logo {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.15);
+      border: 2px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Amiri', serif;
+      font-size: 1.5rem;
+      color: var(--gold);
+      margin: 0 auto 24px;
+    }
+
+    .about-content p {
+      color: var(--gray);
+      line-height: 1.9;
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 12px;
+      padding: 16px 8px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Amiri', serif;
+      font-size: 1.6rem;
+      color: var(--gold2);
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--gray);
+      margin-top: 4px;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact-content {
+      max-width: 400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .contact-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 14px;
+      padding: 18px 20px;
+      color: var(--white);
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .contact-btn:hover {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.05);
+    }
+
+    .contact-btn-icon {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .contact-btn-text h4 { font-size: 0.95rem; }
+    .contact-btn-text p { font-size: 0.8rem; color: var(--gray); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: rgba(0,0,0,0.3);
+      border-top: 1px solid rgba(201,168,76,0.1);
+      padding: 24px;
+      text-align: center;
+      color: var(--gray);
+      font-size: 0.8rem;
+    }
+
+    footer span { color: var(--gold); }
+
+    /* ===== BOTTOM NAV ===== */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(10, 22, 40, 0.97);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(201,168,76,0.15);
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0 16px;
+      z-index: 1000;
+    }
+
+    .bottom-nav a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.65rem;
+      transition: color 0.2s;
+    }
+    .bottom-nav a.active, .bottom-nav a:hover { color: var(--gold); }
+    .bottom-nav a span:first-child { font-size: 1.3rem; }
+
+    /* ===== INSTALL BANNER ===== */
+    #install-banner {
+      position: fixed;
+      bottom: 70px;
+      left: 16px; right: 16px;
+      background: linear-gradient(135deg, var(--navy3), #1a2e50);
+      border: 1px solid var(--gold);
+      border-radius: 16px;
+      padding: 16px 20px;
+      display: none;
+      align-items: center;
+      gap: 12px;
+      z-index: 999;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      animation: slideUp 0.4s ease;
+    }
+
+    #install-banner.show { display: flex; }
+
+    .install-icon { font-size: 2rem; }
+
+    .install-text { flex: 1; }
+    .install-text h4 { font-size: 0.9rem; color: var(--gold2); margin-bottom: 2px; }
+    .install-text p { font-size: 0.75rem; color: var(--gray); }
+
+    .install-btn {
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .install-close {
+      background: none;
+      border: none;
+      color: var(--gray);
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 0 4px;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+    /* Page padding for fixed nav/bottomnav */
+    .page-wrapper { padding-bottom: 80px; }
+  </style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav>
+  <button class="hamburger" aria-label="القائمة">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-logo">Mizan Academy IQ</div>
+  <a href="https://t.me/mizaniq" class="nav-contact" target="_blank">
+    ✈️ تواصل معنا
+  </a>
+</nav>
+
+<div class="page-wrapper">
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-badge">MIZAN ACADEMY IQ</div>
+    <h1>نبتكر لك<br><span>مستقبلاً أفضل</span></h1>
+    <p>منصة تعليمية متكاملة تجمع بين التخطيط الذكي والمتابعة الدقيقة، لنرتقي بك نحو التفوق الدراسي الحقيقي.</p>
+    <div class="hero-btns">
+      <a href="#courses" class="btn-primary">🚀 اكتشف المنصة</a>
+      <a href="#" class="btn-secondary">🏛️ بوابة الطالب</a>
+    </div>
+    <div class="scroll-hint">اسحب للأسفل</div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <h2 class="section-title">لماذا ميزان؟</h2>
+    <p class="section-sub">نقدم لك تجربة تعليمية مختلفة</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>تخطيط ذكي</h3>
+        <p>خطط دراسية مخصصة لكل طالب</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>متابعة دقيقة</h3>
+        <p>تتبع تقدمك لحظة بلحظة</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👨‍🏫</div>
+        <h3>أساتذة متميزون</h3>
+        <p>نخبة من أفضل المدرسين</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3>تعلم أينما كنت</h3>
+        <p>منصة متاحة على جميع الأجهزة</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section id="courses">
+    <h2 class="section-title">الكورسات</h2>
+    <p class="section-sub">اختر ما يناسبك وابدأ رحلتك</p>
+    <div class="courses-list">
+      <a href="#" class="course-card">
+        <div class="course-icon">📐</div>
+        <div class="course-info">
+          <h3>الرياضيات</h3>
+          <p>من الأساسيات إلى المتقدم</p>
+        </div>
+        <span class="course-arrow">←</span>
+      </a>
+      <a href="#" class="course-card">
+        <div class="course-icon">🔬</div>
+        <div class="course-info">
+          <h3>العلوم</h3>
+          <p>فيزياء، كيمياء، أحياء</p>
+        </div>
+        <span class="course-arrow">←</span>
+      </a>
+      <a href="#" class="course-card">
+        <div class="course-icon">📖</div>
+        <div class="course-info">
+          <h3>اللغة العربية</h3>
+          <p>نحو وأدب وتعبير</p>
+        </div>
+        <span class="course-arrow">←</span>
+      </a>
+      <a href="#" class="course-card">
+        <div class="course-icon">🌐</div>
+        <div class="course-info">
+          <h3>اللغة الإنجليزية</h3>
+          <p>محادثة وقواعد وكتابة</p>
+        </div>
+        <span class="course-arrow">←</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <h2 class="section-title">عن المنصة</h2>
+    <p class="section-sub">قصتنا ورسالتنا</p>
+    <div class="about-content">
+      <div class="about-logo">MI</div>
+      <p>Mizan Academy IQ منصة تعليمية عراقية متخصصة في رفع مستوى الطلاب أكاديمياً من خلال منهجية متكاملة تجمع بين التعليم الرقمي والمتابعة الشخصية.</p>
+      <p>نؤمن أن كل طالب يمتلك إمكانات عظيمة، ومهمتنا مساعدته على اكتشافها والوصول إلى تفوقه الحقيقي.</p>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-num">+500</div>
+          <div class="stat-label">طالب</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">+20</div>
+          <div class="stat-label">كورس</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">+50</div>
+          <div class="stat-label">أستاذ</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2 class="section-title">تواصل معنا</h2>
+    <p class="section-sub">نحن هنا لمساعدتك</p>
+    <div class="contact-content">
+      <a href="https://t.me/mizaniq" class="contact-btn" target="_blank">
+        <div class="contact-btn-icon">✈️</div>
+        <div class="contact-btn-text">
+          <h4>تيليغرام</h4>
+          <p>تواصل معنا مباشرة</p>
+        </div>
+      </a>
+      <a href="https://wa.me/9647xxxxxxxxx" class="contact-btn" target="_blank">
+        <div class="contact-btn-icon">📱</div>
+        <div class="contact-btn-text">
+          <h4>واتساب</h4>
+          <p>أرسل لنا رسالة</p>
+        </div>
+      </a>
+      <a href="mailto:info@mizaniq.online" class="contact-btn">
+        <div class="contact-btn-icon">✉️</div>
+        <div class="contact-btn-text">
+          <h4>البريد الإلكتروني</h4>
+          <p>info@mizaniq.online</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  جميع الحقوق محفوظة © 2025 <span>Mizan Academy IQ</span>
+</footer>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <a href="#home" class="active"><span>🏠</span><span>الرئيسية</span></a>
+  <a href="#courses"><span>📚</span><span>الكورسات</span></a>
+  <a href="#about"><span>ℹ️</span><span>عن المنصة</span></a>
+  <a href="#contact"><span>📞</span><span>تواصل</span></a>
+</nav>
+
+<!-- PWA INSTALL BANNER -->
+<div id="install-banner">
+  <div class="install-icon">📲</div>
+  <div class="install-text">
+    <h4>ثبّت التطبيق</h4>
+    <p>استمتع بتجربة أسرع وأفضل</p>
+  </div>
+  <button class="install-btn" id="install-btn">تثبيت</button>
+  <button class="install-close" id="install-close">✕</button>
+</div>
+
+<script>
+  // PWA Install
+  let deferredPrompt;
+  const banner = document.getElementById('install-banner');
+  const installBtn = document.getElementById('install-btn');
+  const closeBtn = document.getElementById('install-close');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    setTimeout(() => banner.classList.add('show'), 2000);
+  });
+
+  installBtn.addEventListener('click', async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      banner.classList.remove('show');
+    }
+  });
+
+  closeBtn.addEventListener('click', () => banner.classList.remove('show'));
+
+  // Bottom nav active
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.bottom-nav a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+
+  // Register Service Worker
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').then(() => {
+      console.log('SW registered');
+    });
+  }
+</script>
+</body>
+</html>
