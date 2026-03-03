@@ -1,0 +1,32 @@
+{
+  "name": "Mizan Academy IQ",
+  "short_name": "ميزان",
+  "description": "منصة تعليمية متكاملة تجمع بين التخطيط الذكي والمتابعة الدقيقة",
+  "start_url": "/",
+  "scope": "/", 
+  "display": "standalone",
+  "background_color": "#0a1628",
+  "theme_color": "#0d1b2a",
+  "orientation": "portrait",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "https://i.ibb.co/99Fq5wMh/mizaniq-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education"],
+  "shortcuts": [
+    {
+      "name": "الكورسات",
+      "url": "/#courses"
+    },
+    {
+      "name": "تواصل معنا",
+      "url": "/#contact"
+    }
+  ]
+}
