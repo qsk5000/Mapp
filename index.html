@@ -490,8 +490,8 @@
     </h1>
     <p class="hero-sub">منصة تعليمية متكاملة تجمع بين التخطيط الذكي والمتابعة الدقيقة.</p>
     <div class="hero-btns">
-      <button class="hero-btn-primary" onclick="scrollTo('#sections')">اكتشف المنصة</button>
-      <a href="/ba" class="hero-btn-secondary">بوابة الطالب</a>
+      <button class="hero-btn-primary" onclick="navTo('ba')">اكتشف المنصة</button>
+      <a href="#" onclick="navTo('ba'); return false;" class="hero-btn-secondary">بوابة الطالب</a>
     </div>
   </div>
 </section>
@@ -521,32 +521,32 @@
   <div class="section-inner">
 
 <div class="links-grid">
-  <a href="/pr" class="link-card reveal">
+  <a href="#" onclick="navTo('pr'); return false;" class="link-card reveal">
     <div class="link-icon"><i class="fas fa-magic"></i></div>
     <div class="link-label">المميزات</div>
     <div class="link-arrow"><i class="fas fa-arrow-left"></i></div>
   </a>
-  <a href="/su" class="link-card reveal reveal-delay-1">
+  <a href="#" onclick="navTo('su'); return false;" class="link-card reveal reveal-delay-1">
     <div class="link-icon"><i class="fas fa-gem"></i></div>
     <div class="link-label">الباقات</div>
     <div class="link-arrow"><i class="fas fa-arrow-left"></i></div>
   </a>
-  <a href="/op" class="link-card reveal reveal-delay-2">
+  <a href="#" onclick="navTo('op'); return false;" class="link-card reveal reveal-delay-2">
     <div class="link-icon"><i class="fas fa-comment-dots"></i></div>
     <div class="link-label">آراء الطلبة</div>
     <div class="link-arrow"><i class="fas fa-arrow-left"></i></div>
   </a>
-  <a href="/wh" class="link-card reveal reveal-delay-3">
+  <a href="#" onclick="navTo('wh'); return false;" class="link-card reveal reveal-delay-3">
     <div class="link-icon"><i class="fas fa-dharmachakra"></i></div>
     <div class="link-label">دولاب الحظ</div>
     <div class="link-arrow"><i class="fas fa-arrow-left"></i></div>
   </a>
-  <a href="/ba" class="link-card reveal">
+  <a href="#" onclick="navTo('ba'); return false;" class="link-card reveal">
     <div class="link-icon"><i class="fas fa-university"></i></div>
     <div class="link-label">بوابة ميزان</div>
     <div class="link-arrow"><i class="fas fa-arrow-left"></i></div>
   </a>
-  <a href="/qu" class="link-card reveal reveal-delay-1">
+  <a href="#" onclick="navTo('qu'); return false;" class="link-card reveal reveal-delay-1">
     <div class="link-icon"><i class="fas fa-question-circle"></i></div>
     <div class="link-label">الأسئلة</div>
     <div class="link-arrow"><i class="fas fa-arrow-left"></i></div>
@@ -562,11 +562,11 @@
 </footer>
 
 <script>
-/* ── 🟢 GitHub Pages Redirect Handler ── */
-if (sessionStorage.redirect) {
-  var redirect = sessionStorage.redirect;
-  delete sessionStorage.redirect;
-  window.history.replaceState(null, null, redirect);
+/* ── 🟢 Client-side Navigation ── */
+function navTo(page) {
+  const baseUrl = 'https://www.mizaniq.online';
+  const url = baseUrl + '/' + page;
+  window.location.href = url;
 }
 
 /* ── 🟢 تفعيل الـ PWA (تثبيت التطبيق) ── */
